@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Wrapper from "./components/Wrapper";
+import Screen from "./components/Screen";
+import ButtonBox from "./components/ButtonBox";
+import Button from "./components/Button";
+import { MdBackspace } from "react-icons/md";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+	const btnValues = [
+		["C", "+/-", "%", "/"],
+		[7, 8, 9, "X"],
+		[4, 5, 6, "-"],
+		[1, 2, 3, "+"],
+		[0, ".", <MdBackspace className="icon" />, "="],
+	];
+	return (
+		<Wrapper>
+			<Screen value="0" />
+			<ButtonBox>
+				{btnValues.flat().map((btn, i) => {
+					return (
+						<Button
+							key={i}
+							className={btn === "=" ? "equals" : ""}
+							value={btn}
+							onClick={() => {
+								console.log(`${btn} clicked!`);
+							}}
+						/>
+					);
+				})}
+			</ButtonBox>
+		</Wrapper>
+	);
+};
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default App;
