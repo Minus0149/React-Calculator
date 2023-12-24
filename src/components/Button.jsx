@@ -6,15 +6,11 @@ const Button = ({ id, className, value, onClick, btnType }) => {
 			id={id}
 			className={className}
 			onClick={onClick}
-			onTouchStart={() => {
-				document
-					.getElementById(`button-${value}`)
-					.classList.add(`${btnType}-active`);
+			onTouchStart={(e) => {
+				e.target.classList.add(`${btnType}-active`);
 			}}
-			onTouchEnd={() => {
-				document
-					.getElementById(`button-${value}`)
-					.classList.remove(`${btnType}-active`);
+			onTouchEnd={(e) => {
+				e.target.classList.remove(`${btnType}-active`);
 			}}
 		>
 			{value}
